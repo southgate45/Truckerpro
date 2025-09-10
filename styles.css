@@ -1,0 +1,28 @@
+:root{--bg:#0b0f19;--card:#121829;--muted:#98a2b3;--text:#e6eaf2;--brand:#0b5cff;--ring:#2949ff}
+*{box-sizing:border-box}
+body{margin:0;background:#0b0f19;color:var(--text);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial}
+.appbar{position:sticky;top:0;display:flex;gap:8px;align-items:center;justify-content:space-between;padding:14px 16px;background:#0f1526;border-bottom:1px solid #1f2937}
+.container{max-width:1100px;margin:16px auto;padding:0 16px}
+.card{background:var(--card);border:1px solid #1f2a44;border-radius:14px;padding:16px;margin:12px 0;box-shadow:0 8px 28px rgba(0,0,0,.25)}
+h1,h2{margin:.2em 0 .6em} h2{font-size:1.1rem;color:#d1d8e6}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+label{display:flex;flex-direction:column;gap:6px}
+input,select{background:#0b1120;color:var(--text);border:1px solid #263657;border-radius:10px;padding:10px 12px;outline:none}
+input:focus{border-color:var(--ring);box-shadow:0 0 0 2px rgba(41,73,255,.3)}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+button,.filebtn{border:1px solid #2a3b63;background:#0e1834;color:var(--text);padding:10px 14px;border-radius:10px;cursor:pointer}
+button.primary{background:var(--brand);border-color:transparent}
+button.ghost{background:#0b1120}
+button.danger{background:#2a0f15;border-color:#4b0f18;color:#ffb4b4}
+.table-wrap{overflow:auto;border:1px solid #1f2a44;border-radius:12px}
+table{border-collapse:separate;border-spacing:0;width:100%}
+th,td{padding:10px 8px;border-bottom:1px solid #1f2a44;white-space:nowrap}
+th{position:sticky;top:0;background:#0e162b}
+.totals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.totals-grid div{background:#0b1120;border:1px solid #1f2a44;border-radius:12px;padding:10px}
+.totals-grid span{display:block;color:#9aa8c2;font-size:.85rem}
+.badge{padding:2px 8px;border-radius:999px;font-size:.85rem;display:inline-block}
+.inline-details summary{cursor:pointer;color:#b7c3da}
+.foot{padding:18px;text-align:center;color:#99a4bb}
+.filebtn input{display:none}
+nav{display:flex;gap:6px}
