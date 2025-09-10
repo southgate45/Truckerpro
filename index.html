@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Trucker Profit Pro</title>
+<meta name="theme-color" content="#0b5cff" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="icon-512.png">
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="appbar">
+  <h1>Trucker Profit Pro</h1>
+  <nav>
+    <button id="openSettings" class="ghost">Settings</button>
+    <button id="openPro" class="primary">Go Pro</button>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="card">
+    <h2>Add Load</h2>
+    <form id="entryForm">
+      <div class="grid">
+        <label>Date <input type="date" id="date" required></label>
+        <label>Order # <input type="text" id="order" placeholder="0561850"></label>
+        <label>Origin <input type="text" id="origin" placeholder="City, ST"></label>
+        <label>Destination <input type="text" id="destination" placeholder="City, ST"></label>
+        <label>Loaded miles <input type="number" id="loaded" min="0" step="1" value="0"></label>
+        <label>Empty miles <input type="number" id="empty" min="0" step="1" value="0"></label>
+        <label>Gross ($) <input type="number" id="gross" min="0" step="0.01" required></label>
+        <label>FSC/Reimb ($) <input type="number" id="reimb" min="0" step="0.01" value="0"></label>
+        <label>Advance ($) <input type="number" id="adv" min="0" step="0.01" value="0"></label>
+        <label>DEF ($) <input type="number" id="def" min="0" step="0.01" value="0"></label>
+        <label>Tolls ($) <input type="number" id="tolls" min="0" step="0.01" value="0"></label>
+      </div>
+      <details class="inline-details">
+        <summary>Fuel/MPG (optional override)</summary>
+        <div class="grid">
+          <label>Pump price ($/gal) <input type="number" id="pump" step="0.01"></label>
+          <label>Discount ($/gal) <input type="number" id="disc" step="0.01"></label>
+          <label>MPG <input type="number" id="mpg" step="0.01"></label>
+        </div>
+      </details>
+      <div class="actions">
+        <button class="primary" type="submit">Save Load</button>
+        <button class="ghost" type="button" id="resetForm">Reset</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="card">
+    <h2>Totals</h2>
+    <div class="totals-grid">
+      <div><span>Total miles</span><strong id="tMiles">0</strong></div>
+      <div><span>Total gross</span><strong id="tGross">$0.00</strong></div>
+      <div><span>Your share</span><strong id="tShare">$0.00</strong></div>
+      <div><span>Fuel (est.)</span><strong id="tFuel">$0.00</strong></div>
+      <div><span>Fixed costs</span><strong id="tFixed">$0.00</strong></div>
+      <div><span>Net (est.)</span><strong id="tNet">$0.00</strong></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Entries <small id="limitNote"></small></h2>
+    <div class="table-wrap">
+      <table id="entriesTable">
+        <thead><tr>
+          <th>Date</th><th>Order</th><th>From → To</th><th>Mi (L/E)</th>
+          <th>Gross</th><th>Reimb</th><th>Adv</th><th>Fuel</th><th>Net</th><th></th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="actions">
+      <button class="ghost" id="exportCsv">Export CSV</button>
+      <button class="ghost" id="backup">Backup JSON</button>
+      <label class="filebtn">Restore <input type="file" id="restore" accept="application/json"></label>
+      <button class="danger" id="clearAll">Clear All</button>
+    </div>
+  </section>
+</main>
+
+<!-- Settings -->
+<dialog id="settingsDialog">
+  <form method="dialog" id="settingsForm">
+    <h2>Settings</h2>
+    <div class="grid">
+      <label>Your share (0.35 = 35%) <input type="number" id="sShare" step="0.01" min="0" max="1"></label>
+      <label>Default pump ($/gal) <input type="number" id="sPump" step="0.01"></label>
+      <label>Discount ($/gal) <input type="number" id="sDisc" step="0.01"></label>
+      <label>MPG <input type="number" id="sMpg" step="0.01"></label>
+      <label>Fixed costs / week ($) <input type="number" id="sFixed" step="0.01"></label>
+      <label>Target net / week ($) <input type="number" id="sTarget" step="0.01"></label>
+    </div>
+    <div class="actions">
+      <button value="cancel" class="ghost">Cancel</button>
+      <button value="default" id="saveSettings" class="primary">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<footer class="foot">
+  <small>Works offline • Add from browser menu → “Add to Home Screen”.</small>
+</footer>
+
+<script src="script.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  addEventListener('load', ()=> navigator.serviceWorker.register('./service-worker.js'));
+}
+</script>
+</body>
+</html>
